@@ -240,7 +240,7 @@ const DefaultLayout = ({ children, noNavbar, noFooter }) => {
                     <div style={{ padding: 10 }}>
                       <div
                         style={{
-                          width: "100%",  
+                          width: "100%",
                           borderColor: "transparent",
                           borderWidth: 1,
                           borderStyle: "solid",
@@ -252,27 +252,27 @@ const DefaultLayout = ({ children, noNavbar, noFooter }) => {
                       </div>
                       <div>
                         <div style={{ marginTop: 20, marginLeft: 15 }}>
-                          <div style={{ marginBottom: 10, display:'flex',  }}>
+                          <div style={{ marginBottom: 10, display: "flex" }}>
                             <Avatar>
                               <FolderIcon />
                             </Avatar>
-                            <div style={{marginLeft:20,marginTop:10}}>
+                            <div style={{ marginLeft: 20, marginTop: 10 }}>
                               Subject name header
                             </div>
                           </div>
-                          <div style={{ marginBottom: 10, display:'flex',  }}>
+                          <div style={{ marginBottom: 10, display: "flex" }}>
                             <Avatar>
                               <PageviewIcon />
                             </Avatar>
-                            <div style={{marginLeft:20,marginTop:10}}>
+                            <div style={{ marginLeft: 20, marginTop: 10 }}>
                               Subject name header
                             </div>
                           </div>
-                          <div style={{ marginBottom: 10, display:'flex',  }}>
+                          <div style={{ marginBottom: 10, display: "flex" }}>
                             <Avatar>
                               <AssignmentIcon />
                             </Avatar>
-                            <div style={{marginLeft:20,marginTop:10}}>
+                            <div style={{ marginLeft: 20, marginTop: 10 }}>
                               Subject name header
                             </div>
                           </div>
