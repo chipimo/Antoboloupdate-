@@ -1,0 +1,35 @@
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(151, 151, 151);
+  outline: 1px solid slategrey;
+  border-radius: 20px;
+}
+
+.custom-bar::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px !important;
+  cursor: pointer;
+}
+
+.custom-bar::-webkit-scrollbar-thumb {
+  background-color: rgba(168, 168, 168, 0.589);
+  outline: 1px solid slategrey;
+  border-radius: 20px;
+}
+
+.card-haver{
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.card-haver:hover{
+  margin-top: -10px;
+
+}
