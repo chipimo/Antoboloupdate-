@@ -240,7 +240,7 @@ const DefaultLayout = ({ children, noNavbar, noFooter }) => {
                     <div style={{ padding: 10 }}>
                       <div
                         style={{
-                          width: "100%",
+                          width: "100%",  
                           borderColor: "transparent",
                           borderWidth: 1,
                           borderStyle: "solid",
