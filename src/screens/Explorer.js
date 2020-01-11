@@ -21,6 +21,10 @@ import AssignmentIcon from "@material-ui/icons/Assignment";
 import { Widget, addResponseMessage } from "react-chat-widget";
 import "react-chat-widget/lib/styles.css";
 import { useMediaQuery } from "react-responsive";
+import PrivacyPolicy from "./PrivacyPolicy";
+import TCS from "./TCS";
+import NewAssingments from "./NewAssignments";
+import TrandingAssignments from "./TrandingAssignments";
 
 function zoom(val) {
   return spring(val, {
@@ -139,14 +143,18 @@ const Explorer = props => {
         >
           <Route path="/Home-page/Explorer" component={Home} />
           <Route path="/Home-page/Assignments" component={Assignments} />
+          <Route path="/Home-page/New-Assignments" component={NewAssingments} />
+          <Route path="/Home-page/Tranding-Assignments" component={TrandingAssignments} />
           <Route path="/Home-page/Pastpapers" component={Pastpapers} />
           <Route path="/Home-page/Books" component={Books} />
           <Route path="/Home-page/Newspapers" component={Newspapers} />
           <Route path="/Home-page/Blog" component={Blog} />
           <Route path="/Home-page/Knowledge-Base" component={KnowledgeBase} />
           <Route path="/Home-page/FAQ" component={FAQ} />
-          <Route path="/Home-page/Access" component={AccessComp} />
+          <Route path="/Home-page/Help" component={AccessComp} />
           <Route path="/Home-page/About" component={About} />
+          <Route path="/Home-page/Privacy-Policy" component={PrivacyPolicy} />
+          <Route path="/Home-page/TCS" component={TCS} />
         </AnimatedSwitch>
       </div>
 

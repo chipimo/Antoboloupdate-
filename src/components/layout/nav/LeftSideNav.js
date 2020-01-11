@@ -263,30 +263,34 @@ function LeftSideNav(props) {
           active={activeItem === "Explorer"}
           onClick={handleItemClick}
         >
+          <Icon name="grid layout" />
           Explorer
         </Menu.Item>
         <Menu.Item>
           Assignments
           <Menu.Menu>
             <Menu.Item
-              name="All"
-              active={activeItem === "All"}
+              name="Assignments"
+              active={activeItem === "Assignments"}
               onClick={handleItemClick}
             >
+          <Icon name="edit" />
               All Assignments
             </Menu.Item>
             <Menu.Item
-              name="add"
-              active={activeItem === "add"}
+              name="New-Assignments"
+              active={activeItem === "New-Assignments"}
               onClick={handleItemClick}
             >
+          <Icon name="file alternate" />
               New Assignments
             </Menu.Item>
             <Menu.Item
-              name="about"
-              active={activeItem === "about"}
+              name="Tranding-Assignments"
+              active={activeItem === "Tranding-Assignments"}
               onClick={handleItemClick}
             >
+              <Icon name="paperclip" />
               Tranding
             </Menu.Item>
           </Menu.Menu>
@@ -297,7 +301,7 @@ function LeftSideNav(props) {
           active={activeItem === "Pastpapers"}
           onClick={handleItemClick}
         >
-          <Icon name="grid layout" />
+          <Icon name="copy outline" />
           Past Papers
         </Menu.Item>
         <Menu.Item
@@ -305,6 +309,7 @@ function LeftSideNav(props) {
           active={activeItem === "Newspapers"}
           onClick={handleItemClick}
         >
+          <Icon name="list alternate outline" />
           News Papers
         </Menu.Item>
         <Menu.Item
@@ -312,6 +317,7 @@ function LeftSideNav(props) {
           active={activeItem === "Books"}
           onClick={handleItemClick}
         >
+          <Icon name="book" />
           Books
         </Menu.Item>
 
@@ -320,14 +326,26 @@ function LeftSideNav(props) {
           active={activeItem === "Knowledge-Base"}
           onClick={handleItemClick}
         >
+          <Icon name="paper plane outline" />
           Knowledge-Base
         </Menu.Item>
+
         <Menu.Item
           name="FAQ"
           active={activeItem === "FAQ"}
           onClick={handleItemClick}
         >
+          <Icon name="user outline" />
           FAQ
+        </Menu.Item>
+
+        <Menu.Item
+          name="Help"
+          active={activeItem === "Help"}
+          onClick={handleItemClick}
+        >
+          <Icon name="question circle outline" />
+          Help
         </Menu.Item>
 
         <Menu.Item
@@ -335,6 +353,7 @@ function LeftSideNav(props) {
           active={activeItem === "About"}
           onClick={handleItemClick}
         >
+          <Icon name="address card outline" />
           About Us
         </Menu.Item>
         <Menu.Item
@@ -342,23 +361,17 @@ function LeftSideNav(props) {
           active={activeItem === "TCS"}
           onClick={handleItemClick}
         >
+          <Icon name="file pdf outline" />
           Terms and Conditions
         </Menu.Item>
         <Menu.Item
-          name="Privacy"
-          active={activeItem === "Privacy"}
+          name="Privacy-Policy"
+          active={activeItem === "Privacy-Policy"}
           onClick={handleItemClick}
         >
+          <Icon name="file pdf outline" />
           Privacy Policy
         </Menu.Item>
-
-        <Dropdown item text="More">
-          <Dropdown.Menu>
-            <Dropdown.Item icon="edit" text="Add Files" />
-            <Dropdown.Item icon="settings" text="Account Settings" />
-            <Dropdown.Item icon="globe" text="Help" />
-          </Dropdown.Menu>
-        </Dropdown>
       </Menu>
     </div>
   );
