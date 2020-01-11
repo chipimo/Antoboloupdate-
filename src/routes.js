@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 // Layout Types
-import { DefaultLayout, ItemOver } from "./layouts";
+import { DefaultLayout } from "./layouts";
 import Assignments from "./screens/Assignments";
 import Books from "./screens/Books";
 import Newspapers from "./screens/Newspapers";
@@ -10,7 +10,7 @@ import ItemOverView from "./screens/ItemOverView";
 import Cart from "./screens/Cart";
 import Login from "./screens/Login";
 import SignUp from "./screens/SignUp";
-import Explorer from "./screens/Explorer/"
+import Explorer from "./screens/Explorer/Home"
 
 export default [
   {
@@ -43,11 +43,6 @@ export default [
     path: "/past-papers",
     layout: DefaultLayout,
     component: Pastpapers
-  },
-  {
-    path: "/item-over-view",
-    layout: ItemOver,
-    component: ItemOverView
   },
   {
     path: "/user-store",

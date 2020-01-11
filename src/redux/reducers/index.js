@@ -5,13 +5,23 @@ import NetInfo from "./netInfo";
 import UserInfo from "./userInfo";
 import CardItem from "./CardItem";
 import OnScroll from "./OnScroll";
+import NavTo from "./NavTo";
+import Active_Nav from "./Navigations";
+import SideBarState from "./Sidebar";
 
 const createReducer = asyncReducers => {
   const config = {
-    key: "root", 
+    key: "root",
     storage,
     ...asyncReducers,
-    blacklist: ["NetInfo", "CardItem", "OnScroll"]
+    blacklist: [
+      "NetInfo",
+      "CardItem",
+      "OnScroll",
+      "NavTo",
+      "Active_Nav",
+      "SideBarState"
+    ]
   };
 
   return persistCombineReducers(config, {
@@ -19,6 +29,9 @@ const createReducer = asyncReducers => {
     user: UserInfo,
     OnScroll: OnScroll,
     CardItem: CardItem,
+    NavTo: NavTo,
+    SideBarState: SideBarState,
+    Active_Nav: Active_Nav,
     ...asyncReducers
   });
 };

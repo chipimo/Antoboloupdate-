@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Explorer(props) {
+function Home(props) {
   const [PostListOne, SetPostListOne] = useState(false);
   const classes = useStyles();
   const history = useHistory();
@@ -194,4 +194,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Explorer);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -1,0 +1,44 @@
+.switch-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.switch-wrapper > div {
+  width: 100%;
+  position: fixed;
+}
+
+.main-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.main-wrapper > div {
+  width: 100%;
+  position: absolute;
+}
+
+.top-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.top-wrapper > div {
+  width: 100%;
+  position: fixed;
+}
+
+.logo-img {
+  width: 20px;
+  height: 17px;
+}
+
+.sideBar_comp {
+  position: relative;
+  width: 18%;
+}
+
+.sideBar_comp > div {
+  width: 100%;
+  position: fixed;
+}

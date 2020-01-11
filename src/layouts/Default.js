@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { isMobile } from "react-device-detect";
+import { isMobile } from "react-device-detect"; 
 import TopNav from "../components/layout/nav/TopNav";
 import FooterNav from "../components/layout/nav/FooterNav";
 import {

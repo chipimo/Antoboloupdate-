@@ -6,8 +6,13 @@ import LockOpen from "@material-ui/icons/LockOpen";
 import { FormCheckbox } from "shards-react";
 import { Button } from "antd";
 import { isMobile } from "react-device-detect";
+import { connect } from "react-redux";
 
-function Login() {
+const Login = props => {
+  // React.useEffect(() => {
+    
+  // }, [props]);
+
   return (
     <div
       style={{
@@ -21,7 +26,13 @@ function Login() {
       <h6>
         Don't have an account? <a style={{ color: "green" }}>Sing up free!</a>
       </h6>
-      <div style={{ width: isMobile? "100%": "70%", margin: "auto", marginTop: 50 }}>
+      <div
+        style={{
+          width: isMobile ? "100%" : "70%",
+          margin: "auto",
+          marginTop: 50
+        }}
+      >
         <TextField
           fullWidth
           id="input-with-icon-textfield"
@@ -60,12 +71,26 @@ function Login() {
           </FormCheckbox>
           <a style={{ color: "#8EC78E" }}>Forgot password?</a>
         </div>
-        <div style={{marginTop:30, width:'100%'}}>
-          <Button block type="primary">Login with email</Button>
+        <div style={{ marginTop: 30, width: "100%" }}>
+          <Button block type="primary">
+            Login with email
+          </Button>
         </div>
       </div>
     </div>
   );
+};
+
+function mapStateToProps(state) {
+  return {
+    NavTo: state.NavTo
+  };
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchEvent: data => dispatch(data)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
