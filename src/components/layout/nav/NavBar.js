@@ -53,7 +53,7 @@ const NavBar = props => {
           onClick={handleItemClick}
         >
           <Image
-            className="logo-img"
+            size="mini"
             src="/../../../assets/images/logos/LOGO.png"
             style={{ marginRight: "1.5em" }}
           />
@@ -64,7 +64,7 @@ const NavBar = props => {
           getWidth={getWidth}
           minWidth={Responsive.onlyTablet.minWidth}
         >
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", height: 56, }}>
             <Menu.Item
               as="a"
               name="blog"

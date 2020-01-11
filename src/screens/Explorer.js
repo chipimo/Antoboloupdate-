@@ -111,27 +111,11 @@ const Explorer = props => {
           <div
             style={{
               position: "fixed",
-              backgroundColor: "#F5F5F5",
-              borderColor: "transparent",
-              borderWidth: 1,
-              borderStyle: "solid",
-              borderRightColor: "#E3E3E3",
+              zIndex: 80,
               width: 250,
               height: "100vh"
             }}
           >
-            <div
-              style={{
-                borderColor: "transparent",
-                borderWidth: 1,
-                paddingLeft: 10,
-                borderStyle: "solid",
-                borderBottomColor: "#ECECEC",
-                paddingTop: 10
-              }}
-            >
-              <h6 style={{ color: "#D5D5D5" }}>EXPLORER</h6>
-            </div>
             <div style={{ paddingTop: 10 }}>
               <LeftSideNav />
             </div>
@@ -143,7 +127,7 @@ const Explorer = props => {
         style={{
           width: deviceWidth > 768 ? "60%" : "100%",
           height: "100vh",
-          marginTop: 40,
+          marginTop: 58,
           overflow: "auto"
         }}
       >
