@@ -7,6 +7,12 @@ import Background from "../../assets/images/banner/level-up.png";
 import cards from "./data";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import { Responsive } from "semantic-ui-react";
+
+const getWidth = () => {
+  const isSSR = typeof window === "undefined";
+  return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth;
+};
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,7 +29,10 @@ function Home(props) {
   const classes = useStyles();
   const history = useHistory();
 
+  const [deviceWidth, setDeviceWidth] = React.useState(1032);
+
   useEffect(() => {
+    setDeviceWidth(window.innerWidth);
     window.addEventListener("scroll", handleScroll);
   }, []);
 
@@ -82,99 +91,104 @@ function Home(props) {
                 <p style={{ margin: 0, padding: 0 }}>This year's top sellers</p>
               </div>
 
-              <div
-                className="custom-bar"
-                style={{
-                  paddingTop: 6,
-                  display: "flex",
-                  justifyContent: "space-between",
-                  overflowX: "auto"
+              <Responsive
+                onUpdate={(event, data) => {
+                  setDeviceWidth(data.width);
                 }}
+                getWidth={getWidth}
+                minWidth={Responsive.onlyTablet.minWidth}
               >
-                {cards.map(items => (
-                  <div key={items.id} style={{ margin: 10 }}>
-                    <Card
-                      style={{ overflow: "hidden" }}
-                      small
-                      className="mb-4 card-haver"
-                      onClick={() => {
-                        props.dispatchEvent({
-                          type: "CARDITEMS",
-                          payload: items
-                        });
-                        history.push("/item-over-view");
-                      }}
-                    >
-                      <div style={{ minWidth: 150, height: 270 }}>
-                        <div
-                          style={{
-                            height: 170,
-                            width: "100%",
-                            backgroundPosition: "50% 50%",
-                            backgroundSize: "cover",
-                            backgroundRepeat: "no-repeat",
-                            backgroundImage: `url(${items.img})`
-                          }}
-                        ></div>
-                        <div style={{ padding: 3, paddingLeft: 5 }}>
-                          <Typography
-                            style={{ color: "green" }}
-                            variant="subtitle2"
-                          >
-                            {items.title}
-                          </Typography>
-                          <Typography
-                            style={{ color: "gary" }}
-                            variant="caption"
-                          >
-                            {items.author}
-                          </Typography>
-                          <div style={{ display: "flex" }}>
-                            {items.price === 0.0 ? (
-                              <Typography
-                                style={{ color: "gary" }}
-                                variant="caption"
-                              >
-                                Price free
-                              </Typography>
-                            ) : (
-                              <Typography
-                                style={{ color: "red" }}
-                                variant="caption"
-                              >
-                                Price K {items.price}.00
-                              </Typography>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
-                  </div>
-                ))}
-              </div>
-              <div>
-                
-              </div>
-            </div>
-            <div>
                 <div
+                  className="custom-bar"
                   style={{
-                    marginTop: 10,
-                    borderColor: "transparent",
-                    borderWidth: 1,
-                    borderStyle: "solid",
-                    borderTopColor: "#D9D9D9"
+                    paddingTop: 6,
+                    display: deviceWidth > 768 ? "flex" : "block",
+                    justifyContent: "space-between",
+                    overflowX: "auto"
                   }}
                 >
-                  <Typography
-                    variant="h6"
-                    style={{ color: "green", margin: 0, padding: 0 }}
-                  >
-                    You may also like
-                  </Typography>
-                  
+                  {cards.map(items => (
+                    <div key={items.id} style={{ margin: 10 }}>
+                      <Card
+                        style={{ overflow: "hidden" }}
+                        small
+                        className="mb-4 card-haver"
+                        onClick={() => {
+                          props.dispatchEvent({
+                            type: "CARDITEMS",
+                            payload: items
+                          });
+                          history.push("/item-over-view");
+                        }}
+                      >
+                        <div style={{ minWidth: 150, height: 270 }}>
+                          <div
+                            style={{
+                              height: 170,
+                              width: "100%",
+                              backgroundPosition: "50% 50%",
+                              backgroundSize: "cover",
+                              backgroundRepeat: "no-repeat",
+                              backgroundImage: `url(${items.img})`
+                            }}
+                          ></div>
+                          <div style={{ padding: 3, paddingLeft: 5 }}>
+                            <Typography
+                              style={{ color: "green" }}
+                              variant="subtitle2"
+                            >
+                              {items.title}
+                            </Typography>
+                            <Typography
+                              style={{ color: "gary" }}
+                              variant="caption"
+                            >
+                              {items.author}
+                            </Typography>
+                            <div style={{ display: "flex" }}>
+                              {items.price === 0.0 ? (
+                                <Typography
+                                  style={{ color: "gary" }}
+                                  variant="caption"
+                                >
+                                  Price free
+                                </Typography>
+                              ) : (
+                                <Typography
+                                  style={{ color: "red" }}
+                                  variant="caption"
+                                >
+                                  Price K {items.price}.00
+                                </Typography>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </Card>
+                    </div>
+                  ))}
                 </div>
+              </Responsive>
+              <div></div>
+            </div>
+            <div>
+              <div
+                style={{
+                  marginTop: 10,
+                  borderColor: "transparent",
+                  borderWidth: 1,
+                  borderStyle: "solid",
+                  borderTopColor: "#D9D9D9"
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  style={{ color: "green", margin: 0, padding: 0 }}
+                >
+                  You may also like
+                </Typography>
               </div>
+            </div>
           </div>
         </Container>
       </div>

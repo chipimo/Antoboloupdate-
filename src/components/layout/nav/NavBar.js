@@ -35,10 +35,10 @@ const NavBar = props => {
                 type: "OPENSIDEBAR",
               });
             }}
-            style={{ padding: 10, cursor: "pointer" }}
+            style={{ padding: 14, cursor: "pointer" }}
           >
             <i
-              style={{ color: "#ffffff", fontSize: 18 }}
+              style={{ color: "#ffffff", fontSize: 25 }}
               class="material-icons"
             >
               menu
@@ -57,7 +57,7 @@ const NavBar = props => {
             src="/../../../assets/images/logos/LOGO.png"
             style={{ marginRight: "1.5em" }}
           />
-          Antobolo Assignments
+          Antobolo
         </Menu.Item>
 
         <Responsive

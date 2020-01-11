@@ -20,7 +20,6 @@ import PageviewIcon from "@material-ui/icons/Pageview";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import { Widget, addResponseMessage } from "react-chat-widget";
 import "react-chat-widget/lib/styles.css";
-import { useMediaQuery } from "react-responsive";
 import PrivacyPolicy from "./PrivacyPolicy";
 import TCS from "./TCS";
 import NewAssingments from "./NewAssignments";
@@ -99,7 +98,6 @@ const Explorer = props => {
     >
       <Responsive
         onUpdate={(event, data) => {
-          console.log(data);
           setDeviceWidth(data.width);
         }}
         getWidth={getWidth}
