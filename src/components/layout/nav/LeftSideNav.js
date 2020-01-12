@@ -1,15 +1,18 @@
 import React from "react";
-import { Dropdown, Icon, Input, Menu, Divider } from "semantic-ui-react";
-import { useLocation, withRouter } from "react-router-dom";
-import configureStore from "../../../redux/store";
+import { Icon, Menu } from "semantic-ui-react";
+import { useLocation, useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 
 function LeftSideNav(props) {
   const [activeItem, setactiveItem] = React.useState("Explorer");
+
+  const location = useLocation();
+  const history = useHistory();
+
   const handleItemClick = (e, { name }) => {
     setactiveItem(name);
-    props.history.push(`/home-page/${name}`);
+    history.push(`/home-page/${name}`);
   };
-  const location = useLocation();
 
   React.useEffect(() => {
     if (location.pathname) {
@@ -19,6 +22,17 @@ function LeftSideNav(props) {
         setactiveItem("Assignments");
       }
     }
+
+    // if (props.NavTo.isRouted) {
+    //   if (location.pathname !== `/home-page/${props.NavTo.nav_to}`) {
+    //     setactiveItem(props.NavTo.nav_to);
+    //     history.push(`/home-page/${props.NavTo.nav_to}`);
+    //   }
+    // }
+
+    // return=()=>{
+
+    // }
   }, [props, location]);
 
   return (
@@ -274,7 +288,7 @@ function LeftSideNav(props) {
               active={activeItem === "Assignments"}
               onClick={handleItemClick}
             >
-          <Icon name="edit" />
+              <Icon name="edit" />
               All Assignments
             </Menu.Item>
             <Menu.Item
@@ -282,7 +296,7 @@ function LeftSideNav(props) {
               active={activeItem === "New-Assignments"}
               onClick={handleItemClick}
             >
-          <Icon name="file alternate" />
+              <Icon name="file alternate" />
               New Assignments
             </Menu.Item>
             <Menu.Item
@@ -377,4 +391,17 @@ function LeftSideNav(props) {
   );
 }
 
-export default withRouter(LeftSideNav);
+function mapStateToProps(state) {
+  return {
+    SideBarState: state.SideBarState,
+    NavTo: state.NavTo
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchEvent: data => dispatch(data)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LeftSideNav);

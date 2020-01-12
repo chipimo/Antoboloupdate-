@@ -24,6 +24,7 @@ import PrivacyPolicy from "./PrivacyPolicy";
 import TCS from "./TCS";
 import NewAssingments from "./NewAssignments";
 import TrandingAssignments from "./TrandingAssignments";
+import { useLocation, useHistory } from "react-router-dom";
 
 function zoom(val) {
   return spring(val, {
@@ -63,11 +64,20 @@ const getWidth = () => {
 
 const Explorer = props => {
   const [deviceWidth, setDeviceWidth] = React.useState(1032);
+  const history = useHistory();
+  const location = useLocation();
 
   React.useEffect(() => {
     setDeviceWidth(window.innerWidth);
     window.addEventListener("scroll", handleScroll);
     addResponseMessage("Hello User how would like us to help you?");
+
+    if (props.NavTo.isRouted) {
+      if (location.pathname !== `/home-page/${props.NavTo.nav_to}`) {
+        // setactiveItem(props.NavTo.nav_to);
+        history.push(`/home-page/${props.NavTo.nav_to}`);
+      }
+    }
   }, [props]);
 
   const handleNewUserMessage = newMessage => {
@@ -142,7 +152,10 @@ const Explorer = props => {
           <Route path="/Home-page/Explorer" component={Home} />
           <Route path="/Home-page/Assignments" component={Assignments} />
           <Route path="/Home-page/New-Assignments" component={NewAssingments} />
-          <Route path="/Home-page/Tranding-Assignments" component={TrandingAssignments} />
+          <Route
+            path="/Home-page/Tranding-Assignments"
+            component={TrandingAssignments}
+          />
           <Route path="/Home-page/Pastpapers" component={Pastpapers} />
           <Route path="/Home-page/Books" component={Books} />
           <Route path="/Home-page/Newspapers" component={Newspapers} />

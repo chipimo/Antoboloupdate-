@@ -22,6 +22,7 @@ const NavBar = props => {
       history.push("/home-page/Explorer");
     }
   };
+
   return (
     <div style={{ backgroundColor: "#1B1C1D", width: "100%" }}>
       <Menu inverted fluid>
@@ -32,7 +33,7 @@ const NavBar = props => {
           <div
             onClick={() => {
               props.dispatchEvent({
-                type: "OPENSIDEBAR",
+                type: "OPENSIDEBAR"
               });
             }}
             style={{ padding: 14, cursor: "pointer" }}
@@ -64,7 +65,7 @@ const NavBar = props => {
           getWidth={getWidth}
           minWidth={Responsive.onlyTablet.minWidth}
         >
-          <div style={{ display: "flex", height: 56, }}>
+          <div style={{ display: "flex", height: 56 }}>
             <Menu.Item
               as="a"
               name="blog"
@@ -103,7 +104,8 @@ const NavBar = props => {
 
 function mapStateToProps(state) {
   return {
-    SideBarState: state.SideBarState
+    SideBarState: state.SideBarState,
+    NavTo: state.NavTo
   };
 }
 
