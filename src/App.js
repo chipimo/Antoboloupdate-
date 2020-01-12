@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  useHistory,
+  useLocation
+} from "react-router-dom";
 
 import { AnimatedSwitch, AnimatedRoute, spring } from "react-router-transition";
 import { connect } from "react-redux";
@@ -60,14 +65,22 @@ const App = props => {
   const [activeItem, setactiveItem] = React.useState("Explorer");
 
   const history = useHistory();
+  const location = useLocation();
 
   const handleItemClick = (e, { name }) => {
     setactiveItem(name);
     // history.push(`/home-page/${name}`);
-    props.dispatchEvent({
-      type: "NAVTO",
-      nav_to: name
-    });
+    if (props.NavTo.isRouted) {
+      props.dispatchEvent({
+        type: "NAVTO",
+        nav_to: name
+      });
+    } else {
+      props.dispatchEvent({
+        type: "NAVTO",
+        nav_to: name
+      });
+    }
   };
 
   return (

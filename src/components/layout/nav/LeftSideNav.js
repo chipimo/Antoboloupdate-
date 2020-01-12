@@ -10,6 +10,11 @@ function LeftSideNav(props) {
   const history = useHistory();
 
   const handleItemClick = (e, { name }) => {
+    if (props.NavTo.isRouted) {
+      props.dispatchEvent({
+        type: "OFFLOADROUTE"
+      });
+    }
     setactiveItem(name);
     history.push(`/home-page/${name}`);
   };

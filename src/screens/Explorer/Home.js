@@ -169,7 +169,75 @@ function Home(props) {
                   ))}
                 </div>
               </Responsive>
-              <div></div>
+
+              {/* Mobile */}
+              <Responsive
+                getWidth={getWidth}
+                maxWidth={Responsive.onlyMobile.maxWidth}
+              >
+                <div>
+                  {cards.map(items => (
+                    <div key={items.id} style={{ margin: 10 }}>
+                      <Card
+                        style={{ overflow: "hidden" }}
+                        small
+                        className="mb-4 card-haver"
+                        onClick={() => {
+                          props.dispatchEvent({
+                            type: "CARDITEMS",
+                            payload: items
+                          });
+                          history.push("/Home-page/item-over-view");
+                        }}
+                      >
+                        <div style={{ minWidth: 150, height: 300 }}>
+                          <div
+                            style={{
+                              height: 170,
+                              width: "80%",
+                              backgroundPosition: "50% 50%",
+                              backgroundSize: "cover",
+                              backgroundRepeat: "no-repeat",
+                              backgroundImage: `url(${items.img})`
+                            }}
+                          ></div>
+                          <div style={{ padding: 3, paddingLeft: 5 }}>
+                            <Typography
+                              style={{ color: "green" }}
+                              variant="subtitle2"
+                            >
+                              {items.title}
+                            </Typography>
+                            <Typography
+                              style={{ color: "gary" }}
+                              variant="caption"
+                            >
+                              {items.author}
+                            </Typography>
+                            <div style={{ display: "flex" }}>
+                              {items.price === 0.0 ? (
+                                <Typography
+                                  style={{ color: "gary" }}
+                                  variant="caption"
+                                >
+                                  Price free
+                                </Typography>
+                              ) : (
+                                <Typography
+                                  style={{ color: "red" }}
+                                  variant="caption"
+                                >
+                                  Price K {items.price}.00
+                                </Typography>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </Card>
+                    </div>
+                  ))}
+                </div>
+              </Responsive>
             </div>
             <div>
               <div

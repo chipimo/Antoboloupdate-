@@ -25,6 +25,7 @@ import TCS from "./TCS";
 import NewAssingments from "./NewAssignments";
 import TrandingAssignments from "./TrandingAssignments";
 import { useLocation, useHistory } from "react-router-dom";
+import ItemOverView from "./ItemOverView";
 
 function zoom(val) {
   return spring(val, {
@@ -166,11 +167,12 @@ const Explorer = props => {
           <Route path="/Home-page/About" component={About} />
           <Route path="/Home-page/Privacy-Policy" component={PrivacyPolicy} />
           <Route path="/Home-page/TCS" component={TCS} />
+          <Route path="/Home-page/item-over-view" component={ItemOverView} />
         </AnimatedSwitch>
       </div>
 
       <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
-        <div style={{ width: "18%", paddingTop: 50 }}>
+        <div style={{ width: "18%", paddingTop: 67, marginLeft: 10 }}>
           <div
             style={{
               position: isFixed ? "fixed" : "absolute",
@@ -179,8 +181,9 @@ const Explorer = props => {
               borderColor: "#E5E5E5",
               borderWidth: 1,
               borderStyle: "solid",
-              width: "21%",
-              height: "88vh"
+              width: "20%",
+              height: "83vh",
+              padding: 10
             }}
           >
             <div
