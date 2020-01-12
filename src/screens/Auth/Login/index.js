@@ -1,20 +1,37 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Responsive } from "semantic-ui-react";
+
+const getWidth = () => {
+  const isSSR = typeof window === "undefined";
+  return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth;
+};
 
 const Login = props => {
-  // React.useEffect(() => {
+  const [deviceWidth, setDeviceWidth] = React.useState(1032);
 
-  // }, [props]);
+  React.useEffect(() => {
+    setDeviceWidth(window.innerWidth);
+  }, [props]);
 
   return (
     <div
       style={{
         width: "100%",
         textAlign: "center",
-        padding: 100,
+        paddingLeft: deviceWidth > 768 ? 50 : 100,
+        paddingRight: deviceWidth > 768 ? 50 : 100,
         paddingTop: 5
       }}
     >
+      <Responsive
+        onUpdate={(event, data) => {
+          setDeviceWidth(data.width);
+        }}
+        getWidth={getWidth}
+        minWidth={Responsive.onlyTablet.minWidth}
+      ></Responsive>
+
       <form className="login100-form validate-form flex-sb flex-w">
         <span className="login100-form-title p-b-51">Login</span>
 
