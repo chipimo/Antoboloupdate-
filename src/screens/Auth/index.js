@@ -55,8 +55,13 @@ const UserAuth = props => {
   const [deviceWidth, setDeviceWidth] = React.useState(1032);
 
   const handleItemClick = (e, { name }) => {
-    setActiveItem(name);
-    props.history.push(`/Auth-page/${name}`);
+    if (name === "Home") {
+      setActiveItem(name);
+      props.history.push("/");
+    } else {
+      setActiveItem(name);
+      props.history.push(`/Auth-page/${name}`);
+    }
   };
 
   React.useEffect(() => {
@@ -84,6 +89,12 @@ const UserAuth = props => {
         }}
       >
         <Menu pointing secondary size="huge">
+          <Menu.Item
+            name="Home"
+            color="green"
+            active={activeItem === "Home"}
+            onClick={handleItemClick}
+          />
           <Menu.Item
             name="Login"
             color="green"
