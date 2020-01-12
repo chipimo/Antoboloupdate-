@@ -9,13 +9,18 @@ const getWidth = () => {
 };
 
 const NavBar = props => {
-  const [activeItem, setActiveItem] = React.useState("home");
+  const [activeItem, setActiveItem] = React.useState("");
   const history = useHistory();
 
   const handleItemClick = (e, { name }) => {
+    if (props.NavTo.isRouted) {
+      props.dispatchEvent({
+        type: "OFFLOADROUTE"
+      });
+    }
     setActiveItem(name);
     if (name === "auth") {
-      history.push("/Auth-page");
+      history.push("/Auth-page/Login");
     } else if (name === "blog") {
       history.push("/home-page/Blog");
     } else if (name === "home") {
@@ -50,7 +55,7 @@ const NavBar = props => {
           as="a"
           header
           name="home"
-          active={activeItem === "home"}
+          // active={activeItem === "home"}
           onClick={handleItemClick}
         >
           <Image
@@ -58,7 +63,12 @@ const NavBar = props => {
             src="/../../../assets/images/logos/LOGO.png"
             style={{ marginRight: "1.5em" }}
           />
-          Antobolo
+          <Responsive
+            getWidth={getWidth}
+            minWidth={Responsive.onlyTablet.minWidth}
+          >
+            Antobolo 
+          </Responsive>
         </Menu.Item>
 
         <Responsive

@@ -1,85 +1,129 @@
 import React from "react";
-import { Card, Col, Button } from "shards-react";
+import { Route } from "react-router-dom";
+import { connect } from "react-redux";
+import { Menu, Segment } from "semantic-ui-react";
 import Login from "./Login";
-import { isMobile } from "react-device-detect";
+import SignUp from "./SignUp";
+import { AnimatedSwitch, AnimatedRoute, spring } from "react-router-transition";
+import { Responsive } from "semantic-ui-react";
 
-export default function UserAuth() {
+function glide(val) {
+  return spring(val, {
+    stiffness: 174,
+    damping: 24
+  });
+}
+
+function slide(val) {
+  return spring(val, {
+    stiffness: 125,
+    damping: 16
+  });
+}
+
+const pageTransitions = {
+  atEnter: {
+    offset: 100
+  },
+  atLeave: {
+    offset: glide(-100)
+  },
+  atActive: {
+    offset: glide(0)
+  }
+};
+
+const topBarTransitions = {
+  atEnter: {
+    offset: -100
+  },
+  atLeave: {
+    offset: slide(-150)
+  },
+  atActive: {
+    offset: slide(0)
+  }
+};
+
+const getWidth = () => {
+  const isSSR = typeof window === "undefined";
+  return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth;
+};
+
+const UserAuth = props => {
+  const [activeItem, setActiveItem] = React.useState("Login");
+  const [deviceWidth, setDeviceWidth] = React.useState(1032);
+
+  const handleItemClick = (e, { name }) => {
+    setActiveItem(name);
+    props.history.push(`/Auth-page/${name}`);
+  };
+
+  React.useEffect(() => {
+    setDeviceWidth(window.innerWidth);
+  }, [props]);
+
   return (
-    <div 
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        color: "#ccc"
-      }}
-    >
-      <Col lg="8" className="mb-4">
-        <Card
-          style={{ backgroundColor: "#2D314D", overflow: "hidden" }}
-          small
-          className="mb-4"
-        >
-          {isMobile ? (
-            <div style={{ width: "100%", display: "flex", backgroundColor:"#cfd8dc" }}>
-              <div
-                style={{
-                  width: "100%",
-                  height: 450,
-                  display: "flex",
-                  justifyContent: "center"
-                }}
-              >
-                <div>
-                  <Login />
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div style={{ width: "100%", display: "flex"}}>
-              <div
-                style={{
-                  width: "40%",
-                  height: 450,
-                  display: "flex",
-                  justifyContent: "center"
-                }}
-              >
-                <div style={{ marginTop: 90 }}>
-                  <div style={{ width: "70%", margin: "auto" }}>
-                    <img
-                      id="main-logo"
-                      className="d-inline-block align-top mr-1"
-                      style={{ maxWidth: "200px" }}
-                      src={require("../../assets/images/logos/LOGO-whait.png")}
-                      alt="Antobolo"
-                    />
-                  </div>
-                  <div style={{ marginTop: 10, width: "60%", margin: "auto" }}>
-                    <h6 style={{ color: "#ccc" }}>
-                      Login usign social media to get quick access
-                    </h6>
-                  </div>
-                  <div
-                    style={{
-                      width: "65%",
-                      margin: "auto",
-                      marginTop: 50
-                    }}
-                  >
-                    <Button pill outline size="sm" className="mb-4">
-                      Login with Facebook
-                    </Button>
-                  </div>
-                </div>
-              </div>
-              <div style={{ backgroundColor: "#fff", width: "60%" }}>
-                <Login />
-              </div>
-            </div>
-          )}
-        </Card>
-      </Col>
+    <div>
+      <Responsive
+        onUpdate={(event, data) => {
+          setDeviceWidth(data.width);
+        }}
+        getWidth={getWidth}
+        minWidth={Responsive.onlyTablet.minWidth}
+      ></Responsive>
+      <div
+        style={{
+          width: deviceWidth > 768 ? "50%" : "100%",
+          height: "100vh",
+          textAlign: "center",
+          margin: "auto",
+          overflow: "hidden",
+          padding: 10,
+          paddingTop: 10
+        }}
+      >
+        <Menu pointing secondary size="huge">
+          <Menu.Item
+            name="Login"
+            color="green"
+            active={activeItem === "Login"}
+            onClick={handleItemClick}
+          />
+          <Menu.Item
+            name="SignUp"
+            color="green"
+            active={activeItem === "SignUp"}
+            onClick={handleItemClick}
+          />
+        </Menu>
+        <div>
+          <AnimatedSwitch
+            {...pageTransitions}
+            className="main-wrapper"
+            mapStyles={styles => ({
+              transform: `translateX(${styles.offset}%)`
+            })}
+          >
+            <Route path="/Auth-page/Login" component={Login} />
+            <Route path="/Auth-page/SignUp" component={SignUp} />
+          </AnimatedSwitch>
+        </div>
+      </div>
     </div>
   );
+};
+
+function mapStateToProps(state) {
+  return {
+    NavTo: state.NavTo
+  };
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchEvent: data => dispatch(data)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserAuth);

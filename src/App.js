@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import Explorer from "./screens/Explorer";
 import withTracker from "./withTracker";
 import NavBar from "./components/layout/nav/NavBar";
-import Login from "./screens/Auth/Login";
+import UserAuth from "./screens/Auth";
 import RedirectToHome from "./screens/Redirect";
 import "./app.css";
 import { Icon, Menu } from "semantic-ui-react";
@@ -63,13 +63,13 @@ const App = props => {
 
   // const onClose = () => {};
   const [activeItem, setactiveItem] = React.useState("Explorer");
-
-  const history = useHistory();
-  const location = useLocation();
-
+  
   const handleItemClick = (e, { name }) => {
     setactiveItem(name);
     // history.push(`/home-page/${name}`);
+    props.dispatchEvent({
+      type: "CLOSESIDEBAR"
+    });
     if (props.NavTo.isRouted) {
       props.dispatchEvent({
         type: "NAVTO",
@@ -235,7 +235,7 @@ const App = props => {
               >
                 <Route path="/" exact component={RedirectToHome} />
                 <Route path="/Home-page" component={Explorer} />
-                <Route path="/Auth-page" component={Login} />
+                <Route path="/Auth-page" component={UserAuth} />
               </AnimatedSwitch>
               <AnimatedRoute
                 path="/home-page"

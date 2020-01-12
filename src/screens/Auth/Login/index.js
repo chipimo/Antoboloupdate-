@@ -1,16 +1,9 @@
 import React from "react";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import TextField from "@material-ui/core/TextField";
-import Email from "@material-ui/icons/Email";
-import LockOpen from "@material-ui/icons/LockOpen";
-import { FormCheckbox } from "shards-react";
-import { Button } from "antd";
-import { isMobile } from "react-device-detect";
 import { connect } from "react-redux";
 
 const Login = props => {
   // React.useEffect(() => {
-    
+
   // }, [props]);
 
   return (
@@ -18,65 +11,63 @@ const Login = props => {
       style={{
         width: "100%",
         textAlign: "center",
-        padding: 10,
-        paddingTop: 30
+        padding: 100,
+        paddingTop: 5
       }}
     >
-      <h3>Login to your account</h3>
-      <h6>
-        Don't have an account? <a style={{ color: "green" }}>Sing up free!</a>
-      </h6>
-      <div
-        style={{
-          width: isMobile ? "100%" : "70%",
-          margin: "auto",
-          marginTop: 50
-        }}
-      >
-        <TextField
-          fullWidth
-          id="input-with-icon-textfield"
-          label="Email address"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Email />
-              </InputAdornment>
-            )
-          }}
-        />
-        <div style={{ marginTop: 20 }}>
-          <TextField
-            fullWidth
-            id="input-with-icon-textfield"
-            label="User password"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <LockOpen />
-                </InputAdornment>
-              )
-            }}
-          />
-        </div>
+      <form className="login100-form validate-form flex-sb flex-w">
+        <span className="login100-form-title p-b-51">Login</span>
+
         <div
-          style={{
-            marginTop: 20,
-            display: "flex",
-            justifyContent: "space-between"
-          }}
+          className="wrap-input100 validate-input m-b-16"
+          data-validate="Username is required"
         >
-          <FormCheckbox toggle small defaultChecked>
-            Remmber me
-          </FormCheckbox>
-          <a style={{ color: "#8EC78E" }}>Forgot password?</a>
+          <input
+            className="input100"
+            type="text"
+            name="username"
+            placeholder="Username"
+          />
+          <span className="focus-input100"></span>
         </div>
-        <div style={{ marginTop: 30, width: "100%" }}>
-          <Button block type="primary">
-            Login with email
-          </Button>
+
+        <div
+          className="wrap-input100 validate-input m-b-16"
+          data-validate="Password is required"
+        >
+          <input
+            className="input100"
+            type="password"
+            name="pass"
+            placeholder="Password"
+          />
+          <span className="focus-input100"></span>
         </div>
-      </div>
+
+        <div className="flex-sb-m w-full p-t-3 p-b-24">
+          <div className="contact100-form-checkbox">
+            <input
+              className="input-checkbox100"
+              id="ckb1"
+              type="checkbox"
+              name="remember-me"
+            />
+            <label className="label-checkbox100" for="ckb1">
+              Remember me
+            </label>
+          </div>
+
+          <div>
+            <a href="#" className="txt1">
+              Forgot?
+            </a>
+          </div>
+        </div>
+
+        <div className="container-login100-form-btn m-t-17">
+          <button className="login100-form-btn">Login</button>
+        </div>
+      </form>
     </div>
   );
 };

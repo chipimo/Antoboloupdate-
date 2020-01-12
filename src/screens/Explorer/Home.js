@@ -118,7 +118,7 @@ function Home(props) {
                             type: "CARDITEMS",
                             payload: items
                           });
-                          history.push("/item-over-view");
+                          history.push("/Home-page/item-over-view");
                         }}
                       >
                         <div style={{ minWidth: 150, height: 270 }}>
