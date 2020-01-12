@@ -19,8 +19,8 @@ const Login = props => {
       style={{
         width: "100%",
         textAlign: "center",
-        paddingLeft: deviceWidth > 768 ? 50 : 100,
-        paddingRight: deviceWidth > 768 ? 50 : 100,
+        paddingLeft: 15,
+        paddingRight: 15,
         paddingTop: 5
       }}
     >
