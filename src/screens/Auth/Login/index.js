@@ -12,15 +12,15 @@ const Login = props => {
 
   React.useEffect(() => {
     setDeviceWidth(window.innerWidth);
-  }, [props]);
+  }, [props, window]);
 
   return (
     <div
       style={{
         width: "100%",
         textAlign: "center",
-        paddingLeft: 15,
-        paddingRight: 15,
+        paddingLeft: deviceWidth >= 768 ? 50 : 15,
+        paddingRight: deviceWidth >= 768 ? 50 : 15,
         paddingTop: 5
       }}
     >
