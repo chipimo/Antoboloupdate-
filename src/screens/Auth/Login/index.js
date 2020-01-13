@@ -19,8 +19,8 @@ const Login = props => {
       style={{
         width: "100%",
         textAlign: "center",
-        paddingLeft: deviceWidth >= 768 ? 50 : 15,
-        paddingRight: deviceWidth >= 768 ? 50 : 15,
+        paddingLeft: deviceWidth<=768?15:150,
+        paddingRight: deviceWidth<=768?15:150,
         paddingTop: 5
       }}
     >
@@ -30,8 +30,9 @@ const Login = props => {
         }}
         getWidth={getWidth}
         minWidth={Responsive.onlyTablet.minWidth}
-      ></Responsive>
+      >
 
+      </Responsive>
       <form className="login100-form validate-form flex-sb flex-w">
         <span className="login100-form-title p-b-51">Login</span>
 
@@ -86,6 +87,7 @@ const Login = props => {
         </div>
       </form>
     </div>
+
   );
 };
 
