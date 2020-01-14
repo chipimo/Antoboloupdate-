@@ -11,3 +11,5 @@ export const SETNAV = "SETNAV";
 export const OFFLOADNAV = "OFFLOADNAV";
 export const CLOSESIDEBAR = "CLOSESIDEBAR";
 export const OPENSIDEBAR = "OPENSIDEBAR";
+export const SOCKETID = "SOCKETID";
+export const SOCKETDISCONNECTED = "SOCKETDISCONNECTED";

@@ -17,6 +17,11 @@ import "./app.css";
 import { Icon, Menu } from "semantic-ui-react";
 import ReactSlidingPane from "./components/Sliding-pane/react-sliding-pane";
 import "./components/Sliding-pane/react-sliding-pane.css";
+import { SnackbarProvider } from "notistack";
+
+const socketIOClient = require("socket.io-client");
+
+const socketUrl = "http://localhost:3200";
 
 function glide(val) {
   return spring(val, {
@@ -58,12 +63,13 @@ const topBarTransitions = {
 
 const App = props => {
   React.useEffect(() => {
-    // console.log(props);
+    initiSocket();
   }, [props]);
 
   // const onClose = () => {};
   const [activeItem, setactiveItem] = React.useState("Explorer");
-  
+  const [socketState, setSocketState] = React.useState({});
+
   const handleItemClick = (e, { name }) => {
     setactiveItem(name);
     // history.push(`/home-page/${name}`);
@@ -81,6 +87,28 @@ const App = props => {
         nav_to: name
       });
     }
+  };
+
+  const initiSocket = () => {
+    const socket = socketIOClient(socketUrl);
+    
+    socket.on("connect", () => {
+      setSocketState(socket);
+      props.dispatchEvent({
+        type: "SOCKETID",
+        socket: socket
+      });
+    });
+
+    socket.on("disconnect", () => {
+      props.dispatchEvent({
+        type: "SOCKETDISCONNECTED",
+      });
+    });
+
+    // socket.on('NEW_TILL', this.newEvent);
+    // socket.emit('PRIVATE_MESSAGE', { reciver: 'main', sender: 'tail1' });
+    // this.setState({ socket });
   };
 
   return (

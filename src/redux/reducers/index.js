@@ -8,6 +8,7 @@ import OnScroll from "./OnScroll";
 import NavTo from "./NavTo";
 import Active_Nav from "./Navigations";
 import SideBarState from "./Sidebar";
+import SocketConnId from "./SocketConn";
 
 const createReducer = asyncReducers => {
   const config = {
@@ -20,7 +21,8 @@ const createReducer = asyncReducers => {
       "OnScroll",
       "NavTo",
       "Active_Nav",
-      "SideBarState"
+      "SideBarState",
+      "SocketConnId"
     ]
   };
 
@@ -31,6 +33,7 @@ const createReducer = asyncReducers => {
     CardItem: CardItem,
     NavTo: NavTo,
     SideBarState: SideBarState,
+    SocketConnId: SocketConnId,
     Active_Nav: Active_Nav,
     ...asyncReducers
   });

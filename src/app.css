@@ -19,6 +19,16 @@
   margin-bottom: 200px;
 }
 
+.login-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.login-wrapper > div {
+  width: 100%;
+  position: absolute;
+}
+
 .top-wrapper {
   position: relative;
   width: 100%;

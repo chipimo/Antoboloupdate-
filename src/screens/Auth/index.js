@@ -80,14 +80,14 @@ const UserAuth = props => {
       <div
         style={{
           width: deviceWidth > 768 ? "50%" : "100%",
-          height: "100vh",
-          textAlign: "center",
           margin: "auto",
           overflow: "hidden",
           padding: 10,
           paddingTop: 10
         }}
       >
+        <div style={{height: "100vh",width: '100%', overflow: 'auto',}}>
+
         <Menu pointing secondary size="huge">
           <Menu.Item
             name="Home"
@@ -111,7 +111,7 @@ const UserAuth = props => {
         <div>
           <AnimatedSwitch
             {...pageTransitions}
-            className="main-wrapper"
+            className="login-wrapper"
             mapStyles={styles => ({
               transform: `translateX(${styles.offset}%)`
             })}
@@ -121,6 +121,7 @@ const UserAuth = props => {
           </AnimatedSwitch>
         </div>
       </div>
+        </div>
     </div>
   );
 };
