@@ -77,8 +77,11 @@ const Explorer = props => {
       if (location.pathname !== `/home-page/${props.NavTo.nav_to}`) {
         // setactiveItem(props.NavTo.nav_to);
         history.push(`/home-page/${props.NavTo.nav_to}`);
+      }else{
+        alert(location.pathname)
       }
     }
+    
   }, [props]);
 
   const handleNewUserMessage = newMessage => {

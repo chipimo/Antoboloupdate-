@@ -9,7 +9,7 @@ const SocketConnId = (
 ) => {
   switch (action.type) {
     case SOCKETID:
-        console.log(action.socket);
+        // console.log(action.socket);
         
       state = {
         ...state,

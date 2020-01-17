@@ -6,44 +6,36 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import { AnimatedSwitch, AnimatedRoute, spring } from "react-router-transition";
 import { Responsive } from "semantic-ui-react";
+import PasswordRecovery from "./passwordRecovery";
 
-function glide(val) {
+function zoom(val) {
   return spring(val, {
-    stiffness: 174,
-    damping: 24
+    stiffness: 135,
+    damping: 15
   });
 }
 
-function slide(val) {
-  return spring(val, {
-    stiffness: 125,
-    damping: 16
-  });
+const switchConfig = {
+  atEnter: {
+    opacity: 0,
+    offset: -50
+  },
+  atLeave: {
+    opacity: 0,
+    offset: zoom(50)
+  },
+  atActive: {
+    opacity: 1,
+    offset: zoom(0)
+  }
+};
+
+function mapStyles(styles) {
+  return {
+    opacity: styles.opacity,
+    transform: `translateY(${styles.offset}px)`
+  };
 }
-
-const pageTransitions = {
-  atEnter: {
-    offset: 100
-  },
-  atLeave: {
-    offset: glide(-100)
-  },
-  atActive: {
-    offset: glide(0)
-  }
-};
-
-const topBarTransitions = {
-  atEnter: {
-    offset: -100
-  },
-  atLeave: {
-    offset: slide(-150)
-  },
-  atActive: {
-    offset: slide(0)
-  }
-};
 
 const getWidth = () => {
   const isSSR = typeof window === "undefined";
@@ -79,49 +71,33 @@ const UserAuth = props => {
       ></Responsive>
       <div
         style={{
-          width: deviceWidth > 768 ? "50%" : "100%",
+          width: "100%",
           margin: "auto",
-          overflow: "hidden",
+          overflow: "auto",
           padding: 10,
-          paddingTop: 10
+          paddingTop: 20,
+          height: "100vh"
         }}
       >
-        <div style={{height: "100vh",width: '100%', overflow: 'auto',}}>
-
-        <Menu pointing secondary size="huge">
-          <Menu.Item
-            name="Home"
-            color="green"
-            active={activeItem === "Home"}
-            onClick={handleItemClick}
-          />
-          <Menu.Item
-            name="Login"
-            color="green"
-            active={activeItem === "Login"}
-            onClick={handleItemClick}
-          />
-          <Menu.Item
-            name="SignUp"
-            color="green"
-            active={activeItem === "SignUp"}
-            onClick={handleItemClick}
-          />
-        </Menu>
-        <div>
-          <AnimatedSwitch
-            {...pageTransitions}
-            className="login-wrapper"
-            mapStyles={styles => ({
-              transform: `translateX(${styles.offset}%)`
-            })}
-          >
-            <Route path="/Auth-page/Login" component={Login} />
-            <Route path="/Auth-page/SignUp" component={SignUp} />
-          </AnimatedSwitch>
+        <div
+          style={{ height: "95vh", width: deviceWidth > 768 ? "50%" : "100%",margin:'auto',}}
+        >
+          <div>
+            <AnimatedSwitch
+              {...switchConfig}
+              className="login-wrapper"
+              mapStyles={mapStyles}
+            >
+              <Route path="/Auth-page/Login" component={Login} />
+              <Route path="/Auth-page/SignUp" component={SignUp} />
+              <Route
+                path="/Auth-page/Password-recovery"
+                component={PasswordRecovery}
+              />
+            </AnimatedSwitch>
+          </div>
         </div>
       </div>
-        </div>
     </div>
   );
 };
