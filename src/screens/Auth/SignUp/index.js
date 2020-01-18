@@ -20,6 +20,11 @@ import { green } from "@material-ui/core/colors";
 import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import { Dimmer, Loader } from "semantic-ui-react";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+
 var validator = require("email-validator");
 
 function Alert(props) {
@@ -42,6 +47,30 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
+  },
+  ErrorInfo: {
+    backgroundColor: "#F6DBD8",
+    padding: 20,
+    borderRadius: 5,
+    marginTop: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    borderColor: "#E3887F",
+    borderWidth: 1,
+    borderStyle: "solid"
+  },
+  SuccssMsg: {
+    backgroundColor: "#CCEBDC",
+    padding: 20,
+    borderRadius: 5,
+    marginTop: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    borderColor: "#54BC8B",
+    borderWidth: 1,
+    borderStyle: "solid"
   },
   avatar: {
     margin: theme.spacing(1),
@@ -70,6 +99,10 @@ const SignUp = props => {
   const [confirmPass, setconfirmPass] = React.useState("");
   const [confirmPassError, setconfirmPassError] = React.useState("");
   const [netError, setNetError] = React.useState(false);
+  const [ModalState, setModalState] = React.useState(false);
+  const [InputMsg, setInputMsg] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+
 
   const theme = createMuiTheme({
     palette: {
@@ -116,11 +149,42 @@ const SignUp = props => {
       setconfirmPassError("Password didn't match");
     } else if (!validator.validate(email)) {
       setEmailError("Enter a valid email");
+    } else {
+      setModalState(true);
+      props.SocketConnId.sockectId.emit("USER_REGSTRATION", {
+        name: name,
+        lname: LastName,
+        email: email,
+        password: pass
+      });
+
+      props.SocketConnId.sockectId.on("USER_IS_REGSTARTED", data => {
+        setModalState(false);
+        alert("User reg");
+        console.log(data);
+      });
+
+      props.SocketConnId.sockectId.on("USER_ALREADY_REGSTARTED", data => {
+        setModalState(false);
+        setInputMsg("User alraedy");
+      });
     }
   };
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
   return (
     <div>
+      <Dimmer active={ModalState} inverted>
+        <Loader inverted={ModalState}>Loading</Loader>
+      </Dimmer>
       <div
         style={{
           backgroundColor: "#F7F7F7",
@@ -283,6 +347,31 @@ const SignUp = props => {
           </Box>
         </Container>
       </div>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={InputMsg === "" ? classes.modal : classes.SuccssMsg}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.ErrorInfo}>
+            <h4 id="transition-modal-title">We're sorry</h4>
+            <p
+              id="transition-modal-description"
+              style={{ padding: 0, margin: 0 }}
+            >
+              {InputMsg}
+            </p>
+          </div>
+        </Fade>
+      </Modal>
+      \
       <Snackbar
         open={netError}
         autoHideDuration={20000}

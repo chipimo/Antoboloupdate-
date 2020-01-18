@@ -22,6 +22,7 @@ import { SnackbarProvider } from "notistack";
 const socketIOClient = require("socket.io-client");
 
 const socketUrl = "http://localhost:3200";
+const baseUrl = "https://antobolo-server.herokuapp.com/";
 
 function glide(val) {
   return spring(val, {
@@ -90,7 +91,7 @@ const App = props => {
   };
 
   const initiSocket = () => {
-    const socket = socketIOClient(socketUrl);
+    const socket = socketIOClient(baseUrl);
     
     socket.on("connect", () => {
       setSocketState(socket);

@@ -141,11 +141,19 @@ const Login = props => {
 
         props.SocketConnId.sockectId.on("USER_NOT_EXIST", data => {
           setModalState(false);
+          setInputError(
+            "No account found with the information submited. Please create an account first then login"
+          );
           handleOpen();
           // console.log(`data from sever ${data}`);
         });
-        props.SocketConnId.sockectId.on("USER_EXIST", data => {
+        props.SocketConnId.sockectId.on("USER_IS_VERIFYED", data => {
           props.history.push("/");
+        });
+        props.SocketConnId.sockectId.on("USER_PASS_INCLLECT", data => {
+          setModalState(false);
+          setInputError("Wrong username or password. Try agin");
+          handleOpen();
         });
       }
     } else {
@@ -300,10 +308,7 @@ const Login = props => {
               id="transition-modal-description"
               style={{ padding: 0, margin: 0 }}
             >
-              No account found with the information submited
-            </p>
-            <p id="transition-modal-description">
-              Please create an account first then login
+              {InputError}
             </p>
           </div>
         </Fade>
