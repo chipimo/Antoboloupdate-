@@ -20,6 +20,7 @@ import { green } from "@material-ui/core/colors";
 import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+var validator = require("email-validator");
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -59,10 +60,10 @@ const SignUp = props => {
   const classes = useStyles();
 
   const [name, setname] = React.useState("");
-  const [nameError, setnameError] = React.useState("User name is required");
+  const [nameError, setnameError] = React.useState("");
   const [LastName, setLastname] = React.useState("");
   const [LastNameError, setLastnameError] = React.useState("");
-  const [email, s] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const [emailError, setEmailError] = React.useState("");
   const [pass, setPass] = React.useState("");
   const [passError, setPassError] = React.useState("");
@@ -84,8 +85,8 @@ const SignUp = props => {
       setLastname(event.target.value);
       setLastnameError("");
     } else if (type === "email") {
-      setPass(event.target.value);
-      setPassError("");
+      setEmail(event.target.value);
+      setEmailError("");
     } else if (type === "pass") {
       setPass(event.target.value);
       setPassError("");
@@ -96,9 +97,25 @@ const SignUp = props => {
   };
 
   const onSubmit = () => {
-    if (props.SocketConnId.conn) {
-    } else {
-      setNetError(true);
+    // if (props.SocketConnId.conn) {
+    // } else {
+    //   setNetError(true);
+    // }
+
+    if (name === "") {
+      setnameError("User name is required ");
+    } else if (LastName === "") {
+      setLastnameError("Last name is required");
+    } else if (email === "") {
+      setEmailError("Email is required");
+    } else if (pass === "") {
+      setPassError("Password is required");
+    } else if (confirmPass === "") {
+      setconfirmPassError("Password didn't match");
+    } else if (confirmPass !== pass) {
+      setconfirmPassError("Password didn't match");
+    } else if (!validator.validate(email)) {
+      setEmailError("Enter a valid email");
     }
   };
 
@@ -139,7 +156,7 @@ const SignUp = props => {
                       TextOnChange("fname", text);
                     }}
                     error={nameError !== "" ? true : false}
-                    helperText={nameError !== "" ? "" : nameError}
+                    helperText={nameError === "" ? "" : nameError}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -155,7 +172,7 @@ const SignUp = props => {
                       TextOnChange("lname", text);
                     }}
                     error={LastNameError !== "" ? true : false}
-                    helperText={LastNameError !== "" ? "" : LastNameError}
+                    helperText={LastNameError === "" ? "" : LastNameError}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -171,7 +188,7 @@ const SignUp = props => {
                       TextOnChange("email", text);
                     }}
                     error={emailError !== "" ? true : false}
-                    helperText={emailError !== "" ? "" : emailError}
+                    helperText={emailError === "" ? "" : emailError}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -188,7 +205,7 @@ const SignUp = props => {
                       TextOnChange("pass", text);
                     }}
                     error={passError !== "" ? true : false}
-                    helperText={passError !== "" ? "" : passError}
+                    helperText={passError === "" ? "" : passError}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -205,7 +222,7 @@ const SignUp = props => {
                       TextOnChange("conf-pass", text);
                     }}
                     error={confirmPassError !== "" ? true : false}
-                    helperText={confirmPassError !== "" ? "" : confirmPassError}
+                    helperText={confirmPassError === "" ? "" : confirmPassError}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -213,7 +230,7 @@ const SignUp = props => {
                     control={
                       <Checkbox value="allowExtraEmails" color="primary" />
                     }
-                    label="I want to receive inspiration, marketing promotions and updates via email."
+                    label="I agree to teams and condistions"
                   />
                 </Grid>
               </Grid>

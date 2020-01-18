@@ -47,6 +47,18 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center"
   },
+  ErrorInfo: {
+    backgroundColor: "#F6DBD8",
+    padding: 20,
+    borderRadius: 5,
+    marginTop: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    borderColor: "#E3887F",
+    borderWidth: 1,
+    borderStyle: "solid"
+  },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: "#46A24A"
@@ -282,7 +294,7 @@ const Login = props => {
         }}
       >
         <Fade in={open}>
-          <div className={classes.paper}>
+          <div className={classes.ErrorInfo}>
             <h4 id="transition-modal-title">We're sorry</h4>
             <p
               id="transition-modal-description"

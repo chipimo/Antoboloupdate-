@@ -13,6 +13,7 @@
     "@material-ui/lab": "^4.0.0-alpha.39",
     "antd": "^3.26.3",
     "bootstrap": "^4.4.1",
+    "email-validator": "^2.0.4",
     "mobile-detect": "^1.4.4",
     "notistack": "^0.9.7",
     "prop-types": "^15.7.2",
