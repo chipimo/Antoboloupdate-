@@ -89,10 +89,9 @@ const SignUp = props => {
     } else if (type === "pass") {
       setPass(event.target.value);
       setPassError("");
-    } else if (type === "pass") {
-      setPass(event.target.value);
-      setPassError(""); 0-+
-      -0000000000000000000000000000000000
+    } else if (type === "conf-pass") {
+      setconfirmPass(event.target.value);
+      setconfirmPassError("");
     }
   };
 
