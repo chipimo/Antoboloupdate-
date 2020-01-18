@@ -100,15 +100,23 @@ const SignUp = props => {
   const [confirmPassError, setconfirmPassError] = React.useState("");
   const [netError, setNetError] = React.useState(false);
   const [ModalState, setModalState] = React.useState(false);
+  const [ModalError, setModalError] = React.useState(false);
   const [InputMsg, setInputMsg] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-
 
   const theme = createMuiTheme({
     palette: {
       primary: green
     }
   });
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const TextOnChange = (type, event) => {
     if (type === "fname") {
@@ -160,25 +168,24 @@ const SignUp = props => {
 
       props.SocketConnId.sockectId.on("USER_IS_REGSTARTED", data => {
         setModalState(false);
-        alert("User reg");
-        console.log(data);
+        setModalError(false);
+        setInputMsg(
+          `Your account has been created successfully. Please wait...`
+        );
+        handleOpen();
+        setTimeout(() => {
+          props.history.push("/");
+        }, 6000);
       });
 
       props.SocketConnId.sockectId.on("USER_ALREADY_REGSTARTED", data => {
         setModalState(false);
-        setInputMsg("User alraedy");
+        handleOpen();
+        setModalError(true);
+        setInputMsg(`An account with email ${email} already exist`);
       });
     }
   };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
 
   return (
     <div>
@@ -350,7 +357,7 @@ const SignUp = props => {
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        className={InputMsg === "" ? classes.modal : classes.SuccssMsg}
+        className={classes.modal}
         open={open}
         onClose={handleClose}
         closeAfterTransition
@@ -360,7 +367,7 @@ const SignUp = props => {
         }}
       >
         <Fade in={open}>
-          <div className={classes.ErrorInfo}>
+          <div className={ModalError ? classes.ErrorInfo : classes.SuccssMsg}>
             <h4 id="transition-modal-title">We're sorry</h4>
             <p
               id="transition-modal-description"
@@ -371,7 +378,7 @@ const SignUp = props => {
           </div>
         </Fade>
       </Modal>
-      \
+
       <Snackbar
         open={netError}
         autoHideDuration={20000}
