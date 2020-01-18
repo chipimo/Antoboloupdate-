@@ -17,7 +17,7 @@ import {
   createMuiTheme
 } from "@material-ui/core/styles";
 import { green } from "@material-ui/core/colors";
-import {connect} from "react-redux"
+import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
@@ -55,21 +55,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignUp=(props) =>{
+const SignUp = props => {
   const classes = useStyles();
 
   const [name, setname] = React.useState("");
-  const [nameError, setnameError] = React.useState("");
+  const [nameError, setnameError] = React.useState("User name is required");
   const [LastName, setLastname] = React.useState("");
   const [LastNameError, setLastnameError] = React.useState("");
-  const [email, setEmail] = React.useState("");
+  const [email, s] = React.useState("");
   const [emailError, setEmailError] = React.useState("");
   const [pass, setPass] = React.useState("");
   const [passError, setPassError] = React.useState("");
   const [confirmPass, setconfirmPass] = React.useState("");
   const [confirmPassError, setconfirmPassError] = React.useState("");
   const [netError, setNetError] = React.useState(false);
-
 
   const theme = createMuiTheme({
     palette: {
@@ -78,24 +77,34 @@ const SignUp=(props) =>{
   });
 
   const TextOnChange = (type, event) => {
-    if (type === "email") {
-      setEmail(event.target.value);
-      setEmailError("false");
-    } else {
+    if (type === "fname") {
+      setname(event.target.value);
+      setnameError("");
+    } else if (type === "lname") {
+      setLastname(event.target.value);
+      setLastnameError("");
+    } else if (type === "email") {
       setPass(event.target.value);
-      setPassError(false);
+      setPassError("");
+    } else if (type === "pass") {
+      setPass(event.target.value);
+      setPassError("");
+    } else if (type === "pass") {
+      setPass(event.target.value);
+      setPassError(""); 0-+
+      -0000000000000000000000000000000000
     }
   };
 
   const onSubmit = () => {
-    if (props.SocketConnId.conn) {        
+    if (props.SocketConnId.conn) {
     } else {
       setNetError(true);
     }
   };
 
   return (
-    <div style={{ padding: 20 }}>
+    <div>
       <div
         style={{
           backgroundColor: "#F7F7F7",
@@ -128,10 +137,10 @@ const SignUp=(props) =>{
                     label="First Name"
                     autoFocus
                     onChange={text => {
-                      TextOnChange("pass", text);
+                      TextOnChange("fname", text);
                     }}
-                    error={nameError!==""?true:false}
-                    helperText={nameError!=="" ? "" : nameError}
+                    error={nameError !== "" ? true : false}
+                    helperText={nameError !== "" ? "" : nameError}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -143,6 +152,11 @@ const SignUp=(props) =>{
                     label="Last Name"
                     name="lastName"
                     autoComplete="lname"
+                    onChange={text => {
+                      TextOnChange("lname", text);
+                    }}
+                    error={LastNameError !== "" ? true : false}
+                    helperText={LastNameError !== "" ? "" : LastNameError}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -154,6 +168,11 @@ const SignUp=(props) =>{
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    onChange={text => {
+                      TextOnChange("email", text);
+                    }}
+                    error={emailError !== "" ? true : false}
+                    helperText={emailError !== "" ? "" : emailError}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -166,6 +185,11 @@ const SignUp=(props) =>{
                     type="password"
                     id="password"
                     autoComplete="current-password"
+                    onChange={text => {
+                      TextOnChange("pass", text);
+                    }}
+                    error={passError !== "" ? true : false}
+                    helperText={passError !== "" ? "" : passError}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -178,6 +202,11 @@ const SignUp=(props) =>{
                     type="password"
                     id="password"
                     autoComplete="current-password"
+                    onChange={text => {
+                      TextOnChange("conf-pass", text);
+                    }}
+                    error={confirmPassError !== "" ? true : false}
+                    helperText={confirmPassError !== "" ? "" : confirmPassError}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -252,8 +281,7 @@ const SignUp=(props) =>{
       </Snackbar>
     </div>
   );
-}
-
+};
 
 function mapStateToProps(state) {
   return {

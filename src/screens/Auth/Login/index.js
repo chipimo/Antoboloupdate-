@@ -17,10 +17,7 @@ import {
 } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
-import {
-  Dimmer,
-  Loader
-} from "semantic-ui-react";
+import { Dimmer, Loader } from "semantic-ui-react";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -151,7 +148,7 @@ const Login = props => {
   });
 
   return (
-    <div style={{ padding: 20 }}>
+    <div>
       <Dimmer active={ModalState} inverted>
         <Loader inverted={ModalState}>Loading</Loader>
       </Dimmer>

@@ -9,6 +9,7 @@ import NavTo from "./NavTo";
 import Active_Nav from "./Navigations";
 import SideBarState from "./Sidebar";
 import SocketConnId from "./SocketConn";
+import NotistackReducer from "./Notistack"
 
 const createReducer = asyncReducers => {
   const config = {
@@ -22,19 +23,20 @@ const createReducer = asyncReducers => {
       "NavTo",
       "Active_Nav",
       "SideBarState",
-      "SocketConnId"
+      "SocketConnId","NotistackReducer"
     ]
   };
 
   return persistCombineReducers(config, {
     NetInfo: NetInfo,
     user: UserInfo,
-    OnScroll: OnScroll,
+    OnScroll: OnScroll, 
     CardItem: CardItem,
     NavTo: NavTo,
     SideBarState: SideBarState,
     SocketConnId: SocketConnId,
     Active_Nav: Active_Nav,
+    Notistack: NotistackReducer,
     ...asyncReducers
   });
 };

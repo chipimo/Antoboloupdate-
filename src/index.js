@@ -8,6 +8,7 @@ import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/es/integration/react";
 import configureStore from "./redux/store";
 import { BrowserRouter } from "react-router-dom";
+import { SnackbarProvider } from "notistack";
 
 import "./styles/shards-dashboards.1.1.0.min.css";
 import "antd/dist/antd.css";
@@ -19,9 +20,11 @@ const persistor = persistStore(configureStore);
 ReactDOM.render(
   <Provider store={configureStore}>
     <PersistGate persistor={persistor}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <SnackbarProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </SnackbarProvider>
     </PersistGate>
   </Provider>,
   document.getElementById("root")
