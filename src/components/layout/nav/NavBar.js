@@ -2,6 +2,7 @@ import React from "react";
 import { Menu, Image, Responsive } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
+import UserDropDown from "../../menus/UserDropDown";
 
 const getWidth = () => {
   const isSSR = typeof window === "undefined";
@@ -11,6 +12,10 @@ const getWidth = () => {
 const NavBar = props => {
   const [activeItem, setActiveItem] = React.useState("");
   const history = useHistory();
+
+  React.useEffect(() => {
+    console.log(props);
+  }, []);
 
   const handleItemClick = (e, { name }) => {
     if (props.NavTo.isRouted) {
@@ -67,7 +72,7 @@ const NavBar = props => {
             getWidth={getWidth}
             minWidth={Responsive.onlyTablet.minWidth}
           >
-            Antobolo 
+            Antobolo
           </Responsive>
         </Menu.Item>
 
@@ -98,15 +103,22 @@ const NavBar = props => {
             </Menu.Item>
           </div>
         </Responsive>
-
-        <Menu.Item
-          position="right"
-          name="auth"
-          active={activeItem === "auth"}
-          onClick={handleItemClick}
-        >
-          Login | SignUp
-        </Menu.Item>
+        {props.user.isLogedin ? (
+          <Menu.Item position="right" name="user">
+            <div style={{ display: "flex" }}>
+              <UserDropDown />
+            </div>
+          </Menu.Item>
+        ) : (
+          <Menu.Item
+            position="right"
+            name="auth"
+            active={activeItem === "auth"}
+            onClick={handleItemClick}
+          >
+            Login | SignUp
+          </Menu.Item>
+        )}
       </Menu>
     </div>
   );
@@ -115,7 +127,8 @@ const NavBar = props => {
 function mapStateToProps(state) {
   return {
     SideBarState: state.SideBarState,
-    NavTo: state.NavTo
+    NavTo: state.NavTo,
+    user: state.user
   };
 }
 

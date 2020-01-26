@@ -11,6 +11,7 @@ import {
   Icon
 } from "semantic-ui-react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 const getWidth = () => {
   const isSSR = typeof window === "undefined";
@@ -57,6 +58,7 @@ function DesktopContainer() {
               <div className="results" />
             </div>
           </Menu.Item>
+
           <Menu.Item position="right">
             <Button as="a" inverted>
               Log in
@@ -155,4 +157,16 @@ function TopNav() {
   );
 }
 
-export default TopNav;
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchEvent: data => dispatch(data)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopNav);

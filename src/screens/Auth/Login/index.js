@@ -94,6 +94,10 @@ const Login = props => {
   const [ModalState, setModalState] = React.useState(false);
   const [open, setOpen] = React.useState(false);
 
+  React.useEffect(() => {
+    props.dispatchEvent({ type: "USERLOGOUT" });
+  }, []);
+
   const classes = useStyles();
 
   const handleOpen = () => {
@@ -147,9 +151,15 @@ const Login = props => {
           handleOpen();
           // console.log(`data from sever ${data}`);
         });
+
         props.SocketConnId.sockectId.on("USER_IS_VERIFYED", data => {
+          props.dispatchEvent({
+            type: "USRELOGIN",
+            payload: data
+          });
           props.history.push("/");
         });
+
         props.SocketConnId.sockectId.on("USER_PASS_INCLLECT", data => {
           setModalState(false);
           setInputError("Wrong username or password. Try agin");
@@ -224,10 +234,10 @@ const Login = props => {
                 error={PassError}
                 helperText={PassError ? ErrorMsg : ""}
               />
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
-              />
+              /> */}
               <ThemeProvider theme={theme}>
                 <Button
                   type="submit"

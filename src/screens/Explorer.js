@@ -26,6 +26,8 @@ import NewAssingments from "./NewAssignments";
 import TrandingAssignments from "./TrandingAssignments";
 import { useLocation, useHistory } from "react-router-dom";
 import ItemOverView from "./ItemOverView";
+import UserFiles from "./UserFiles";
+import Profile from "./Profile";
 
 function zoom(val) {
   return spring(val, {
@@ -81,6 +83,8 @@ const Explorer = props => {
         alert(location.pathname)
       }
     }
+
+    
     
   }, [props]);
 
@@ -143,7 +147,7 @@ const Explorer = props => {
         style={{
           width: deviceWidth > 768 ? "60%" : "100%",
           height: "100vh",
-          marginTop: 58,
+          marginTop: 57,
           overflow: "auto"
         }}
       >
@@ -171,6 +175,8 @@ const Explorer = props => {
           <Route path="/Home-page/Privacy-Policy" component={PrivacyPolicy} />
           <Route path="/Home-page/TCS" component={TCS} />
           <Route path="/Home-page/item-over-view" component={ItemOverView} />
+          <Route path="/Home-page/files" component={UserFiles} />
+          <Route path="/Home-page/account" component={Profile} />
         </AnimatedSwitch>
       </div>
 

@@ -114,7 +114,7 @@ const App = props => {
 
   return (
     <Router basename={process.env.REACT_APP_BASENAME || ""}>
-      <div style={{backgroundColor: 'red',}}>
+      <div >
         <ReactSlidingPane
           closeIcon={
             <i style={{ fontSize: 24 }} class="material-icons">
