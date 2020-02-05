@@ -91,7 +91,7 @@ const App = props => {
   };
 
   const initiSocket = () => {
-    const socket = socketIOClient(socketUrl);
+    const socket = socketIOClient(baseUrl);
     
     socket.on("connect", () => {
       setSocketState(socket);
