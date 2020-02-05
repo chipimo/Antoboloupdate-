@@ -10,6 +10,8 @@ import Active_Nav from "./Navigations";
 import SideBarState from "./Sidebar";
 import SocketConnId from "./SocketConn";
 import NotistackReducer from "./Notistack"
+import NewFileModal from "./NewFileModal";
+import ItemList from "./ItemList";
 
 const createReducer = asyncReducers => {
   const config = {
@@ -23,7 +25,9 @@ const createReducer = asyncReducers => {
       "NavTo",
       "Active_Nav",
       "SideBarState",
-      "SocketConnId","NotistackReducer"
+      "SocketConnId","NotistackReducer",
+      "NewFileModal","NewFileModal",
+      "ItemList","ItemList"
     ]
   };
 
@@ -37,6 +41,8 @@ const createReducer = asyncReducers => {
     SocketConnId: SocketConnId,
     Active_Nav: Active_Nav,
     Notistack: NotistackReducer,
+    NewFileModal: NewFileModal,
+    ItemList: ItemList,
     ...asyncReducers
   });
 };

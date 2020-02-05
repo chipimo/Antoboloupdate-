@@ -13,3 +13,7 @@ export const CLOSESIDEBAR = "CLOSESIDEBAR";
 export const OPENSIDEBAR = "OPENSIDEBAR";
 export const SOCKETID = "SOCKETID";
 export const SOCKETDISCONNECTED = "SOCKETDISCONNECTED";
+export const OPENMODAL = "OPENMODAL";
+export const CLOSEMODAL = "OPENMODAL";
+export const LOADLIST = "LOADLIST";
+export const OFFLOADLIST = "OFFLOADLIST";

@@ -5,7 +5,7 @@ const NavTo = (
     isRouted: false,
     nav_to: "/"
   },
-  action
+  action 
 ) => {
   switch (action.type) {
     case NAVTO:

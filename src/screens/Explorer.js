@@ -67,25 +67,32 @@ const getWidth = () => {
 
 const Explorer = props => {
   const [deviceWidth, setDeviceWidth] = React.useState(1032);
+  const [IncreseLayoutWith, setIncreseLayoutWith] = React.useState(false);
+
   const history = useHistory();
   const location = useLocation();
 
   React.useEffect(() => {
     setDeviceWidth(window.innerWidth);
     window.addEventListener("scroll", handleScroll);
-    addResponseMessage("Hello User how would like us to help you?");
-
-    if (props.NavTo.isRouted) {
-      if (location.pathname !== `/home-page/${props.NavTo.nav_to}`) {
-        // setactiveItem(props.NavTo.nav_to);
-        history.push(`/home-page/${props.NavTo.nav_to}`);
-      }else{
-        alert(location.pathname)
-      }
+    // addResponseMessage("Hello User how would like us to help you?");
+    if (
+      location.pathname === "/Home-page/files/file-list" ||
+      location.pathname === "/Home-page/files/new-file"
+    ) {
+      setIncreseLayoutWith(true);
+    } else {
+      setIncreseLayoutWith(false);
     }
 
-    
-    
+    // if (props.NavTo.isRouted) {
+    // alert(location.pathname)
+    // if (location.pathname !== `/home-page/${props.NavTo.nav_to}`) {
+    //   // setactiveItem(props.NavTo.nav_to);
+    //   history.push(`/home-page/${props.NavTo.nav_to}`);
+    // } else {
+    // }
+    // }
   }, [props]);
 
   const handleNewUserMessage = newMessage => {
@@ -145,7 +152,8 @@ const Explorer = props => {
 
       <div
         style={{
-          width: deviceWidth > 768 ? "60%" : "100%",
+          width:
+            deviceWidth > 768 ? (IncreseLayoutWith ? "80%" : "60%") : "100%",
           height: "100vh",
           marginTop: 57,
           overflow: "auto"
@@ -180,64 +188,69 @@ const Explorer = props => {
         </AnimatedSwitch>
       </div>
 
-      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
-        <div style={{ width: "18%", paddingTop: 67, marginLeft: 10 }}>
-          <div
-            style={{
-              position: isFixed ? "fixed" : "absolute",
-              backgroundColor: "#F2F2F2",
-              borderRadius: 5,
-              borderColor: "#E5E5E5",
-              borderWidth: 1,
-              borderStyle: "solid",
-              width: "20%",
-              height: "83vh",
-              padding: 10
-            }}
-          >
+      {IncreseLayoutWith ? null : (
+        <Responsive
+          getWidth={getWidth}
+          minWidth={Responsive.onlyTablet.minWidth}
+        >
+          <div style={{ width: "18%", paddingTop: 67, marginLeft: 10 }}>
             <div
               style={{
-                width: "100%",
-                borderColor: "transparent",
+                position: isFixed ? "fixed" : "absolute",
+                backgroundColor: "#F2F2F2",
+                borderRadius: 5,
+                borderColor: "#E5E5E5",
                 borderWidth: 1,
                 borderStyle: "solid",
-                borderBottomColor: "#D9D9D9",
-                paddingBottom: 5
+                width: "20%",
+                height: "83vh",
+                padding: 10
               }}
             >
-              Categories
-            </div>
-            <div>
-              <div style={{ marginTop: 20, marginLeft: 15 }}>
-                <div style={{ marginBottom: 10, display: "flex" }}>
-                  <Avatar>
-                    <FolderIcon />
-                  </Avatar>
-                  <div style={{ marginLeft: 20, marginTop: 10 }}>
-                    Subject name header
+              <div
+                style={{
+                  width: "100%",
+                  borderColor: "transparent",
+                  borderWidth: 1,
+                  borderStyle: "solid",
+                  borderBottomColor: "#D9D9D9",
+                  paddingBottom: 5
+                }}
+              >
+                Categories
+              </div>
+              <div>
+                <div style={{ marginTop: 20, marginLeft: 15 }}>
+                  <div style={{ marginBottom: 10, display: "flex" }}>
+                    <Avatar>
+                      <FolderIcon />
+                    </Avatar>
+                    <div style={{ marginLeft: 20, marginTop: 10 }}>
+                      Subject name header
+                    </div>
                   </div>
-                </div>
-                <div style={{ marginBottom: 10, display: "flex" }}>
-                  <Avatar>
-                    <PageviewIcon />
-                  </Avatar>
-                  <div style={{ marginLeft: 20, marginTop: 10 }}>
-                    Subject name header
+                  <div style={{ marginBottom: 10, display: "flex" }}>
+                    <Avatar>
+                      <PageviewIcon />
+                    </Avatar>
+                    <div style={{ marginLeft: 20, marginTop: 10 }}>
+                      Subject name header
+                    </div>
                   </div>
-                </div>
-                <div style={{ marginBottom: 10, display: "flex" }}>
-                  <Avatar>
-                    <AssignmentIcon />
-                  </Avatar>
-                  <div style={{ marginLeft: 20, marginTop: 10 }}>
-                    Subject name header
+                  <div style={{ marginBottom: 10, display: "flex" }}>
+                    <Avatar>
+                      <AssignmentIcon />
+                    </Avatar>
+                    <div style={{ marginLeft: 20, marginTop: 10 }}>
+                      Subject name header
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </Responsive>
+        </Responsive>
+      )}
       <Widget
         handleNewUserMessage={handleNewUserMessage}
         // profileAvatar={logo}

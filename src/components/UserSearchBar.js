@@ -5,18 +5,17 @@ import InputBase from "@material-ui/core/InputBase";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import NoteAddIcon from "@material-ui/icons/NoteAdd";
-import Button from "@material-ui/core/Button";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   root: {
     padding: "2px 4px",
     display: "flex",
     alignItems: "center",
-    width: 600,
+    width: "60%",
     height: 45,
     margin: "auto",
-    marginTop:20
+    marginTop: 20
   },
   input: {
     marginLeft: theme.spacing(1),
@@ -31,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function UserSearchBar() {
+const UserSearchBar = props => {
   const classes = useStyles();
 
   return (
@@ -41,6 +40,7 @@ export default function UserSearchBar() {
         placeholder="Search In Files"
         inputProps={{ "aria-label": "search in files" }}
       />
+      <Divider className={classes.divider} orientation="vertical" />
       <IconButton
         type="submit"
         className={classes.iconButton}
@@ -48,17 +48,23 @@ export default function UserSearchBar() {
       >
         <SearchIcon />
       </IconButton>
-      <Divider className={classes.divider} orientation="vertical" />
       {/* <IconButton color="primary" className={classes.iconButton} aria-label="directions">
         <DirectionsIcon />
       </IconButton> */}
-      <Button
-        startIcon={<NoteAddIcon />}
-        className={classes.iconButton}
-        color="primary"
-      >
-        Add new file
-      </Button>
     </Paper>
   );
+};
+
+function mapStateToProps(state) {
+  return {
+    NewFileModal: state.NewFileModal
+  };
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchEvent: data => dispatch(data)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserSearchBar);

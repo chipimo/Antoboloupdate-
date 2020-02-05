@@ -98,7 +98,11 @@ const UserDropDown = props => {
             >
               <ListItem
                 onClick={() => {
-                  history.push("/Home-page/files");
+                  props.dispatchEvent({
+                    type: "NAVTO",
+                    nav_to: "/Home-page/files/file-list"
+                  });
+                  history.push("/Home-page/files/file-list");
                   handleClose();
                 }}
                 button
