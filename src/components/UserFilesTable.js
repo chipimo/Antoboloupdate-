@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 const UserFilesTable = props => {
   React.useEffect(() => {
     var data = { pdf_type: "assignments", id: props.user.email };
-
-    props.SocketConnId.sockectId.emit("PRODUCTS", data);
+setTimeout(function(){ 
+props.SocketConnId.sockectId.emit("PRODUCTS", data);
 
     props.SocketConnId.sockectId.on("PRODUCTS_RESULTS", dataValues => {
       // console.log(dataValues);
@@ -15,6 +15,9 @@ const UserFilesTable = props => {
         payload: dataValues
       });
     });
+
+ }, 1000);
+    
   }, []);
 
   return (
