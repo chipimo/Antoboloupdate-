@@ -135,7 +135,7 @@ const UserFiles = props => {
           marginTop: -65,
         }}
       >
-        <Paper style={{ width: "100%" }}>
+        <Paper style={{ width: "100%", height:'80vh' }}>
           <AnimatedSwitch
             className="uni-wrapper"
             {...pageTransitions}
