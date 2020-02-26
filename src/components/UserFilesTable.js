@@ -4,9 +4,8 @@ import { connect } from "react-redux";
 
 const UserFilesTable = props => {
   React.useEffect(() => {
-    setTimeout(() => {
-      var data = { pdf_type: "assignments", id: props.user.email };
-
+    var data = { pdf_type: "assignments", id: props.user.email };
+    setTimeout(function() {
       props.SocketConnId.sockectId.emit("PRODUCTS", data);
 
       props.SocketConnId.sockectId.on("PRODUCTS_RESULTS", dataValues => {
